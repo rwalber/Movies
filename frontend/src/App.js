@@ -24,7 +24,6 @@ function App() {
         <div className="movie">
           <p>Movies</p>
         </div>
-
         <div className="inputSearch">
           <input type="text" placeholder="Busque um filme por nome, ano ou gênero.." />
         </div>
@@ -32,12 +31,9 @@ function App() {
 
       <div className="movies">
         {pMovies.slice(0, 6).map(movie => {
-          // console.log(movie);
-          return <Movie key={movie.title} movie={movie}/> })}
-        {/* <Movie title={"movie.title"}/> */}
-        {/* {console.log(pMovies)}; */}
-        
-
+            console.log(movie)
+            return <Movie key={movie.title} movie={movie}/> 
+          })}
       </div>
       <div>
         <Routes />

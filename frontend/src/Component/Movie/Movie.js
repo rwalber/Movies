@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../Movie/Movie.css';
 
 import genreList from '../../_constants/genreList';
 
 export default function Movie({ movie }) {
+    const [genreMovie, setGenreMovie] = useState([]);
 
-    // let movieGenre;
+    useEffect(() => {
+        async function loadGenreMovies() {
+            let genre = movie.genre_ids.slice(0, 2).map(genre_id => {
+                return genreList.genres.find(genre_name => {
+                    return genre_name.id === genre_id
+                })
+            }
+            )
+            setGenreMovie(genre)
+        }
+        loadGenreMovies();
+    }, []);
 
     return (
         <>
@@ -31,22 +43,11 @@ export default function Movie({ movie }) {
                             {movie.overview}
                         </p>
                         <div className="category">
-                            {/* {movie.genre_ids.slice(0,2).map(genre_id => { */}
-                            {/* // let genreName = genreList.genres[genre_id].name; */}
-                            {/* // genreName ? console.log(genreName) : console.log("Nao existe"); */}
-                            {/* // console.log(genre_id); */}
-                            {/* // genreList.genres.map(genre => { */}
-                            {/* //     console.log(genre.id == genre_id); */}
-                            {/* // }) */}
-                            {/* // })} */}
-
-
-                            {/* {movie.genre_ids.map(genre => {
-                            genreList.genres[genre].name ? console.log(genreList.genres[genre].name) : "Nao existe"
-                        })} */}
-
-                            {/* <label>Action</label>
-                        <label>Action</label> */}
+                            {genreMovie.map( genreName => 
+                                // Field key to avoid warning
+                                <label key={movie.title+genreName.name}>
+                                    {genreName.name}
+                                </label> )}
                         </div>
                     </div>
                 </div>

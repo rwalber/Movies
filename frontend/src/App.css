@@ -18,7 +18,7 @@ body{
 }
 
 .content {
-  margin: 60px auto 0;
+  margin: 30px auto 0;
   max-width: 1000px;
   width: 100%;
   display: flex;
@@ -47,7 +47,7 @@ align-items: center;
 }
 
 .content .inputSearch input{
-  margin-top: 50px;
+  margin-top: 30px;
   width: 100%;
   height: 40px;
   border: solid 0;
@@ -58,8 +58,7 @@ align-items: center;
 }
 
 .movies {
-  margin: 60px auto 0;
+  margin: 30px auto 0;
   max-width: 850px;
   width: 100%;
-  margin-top: 1px;
 }
