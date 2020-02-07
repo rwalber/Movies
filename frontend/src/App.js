@@ -6,17 +6,23 @@ import Movie from './Component/Movie/Movie';
 import api from './services/api';
 
 function App() {
-
+  let search = false;
   const [pMovies, setPMovies] = useState([]);
+  const [searchMovie, setSearchMovie] = useState([]);
 
   useEffect(() => {
     async function loadPopularMovies() {
       const response = await api.get('/popularmovies', {});
-      // console.log(response.data)
       setPMovies(response.data);
     }
     loadPopularMovies();
   }, []);
+
+  async function searchMovies(event) {
+    search = true;
+    const response = await api.get(`/search/${event}`, {});
+    setSearchMovie(response.data);
+  }
 
   return (
     <>
@@ -24,17 +30,31 @@ function App() {
         <div className="movie">
           <p>Movies</p>
         </div>
+
         <div className="inputSearch">
-          <input type="text" placeholder="Busque um filme por nome, ano ou gênero.." />
+          <input type="text"
+            placeholder="Busque um filme por nome, ano ou gênero.."
+            onChange={event => searchMovies(event.target.value)} />
         </div>
       </div>
 
       <div className="movies">
-        {pMovies.slice(0, 6).map(movie => {
-            console.log(movie)
-            return <Movie key={movie.title} movie={movie}/> 
+        {/* {(search === false) &&
+          <div className="popularMovies">
+            {pMovies.slice(0, 6).map(movie => {
+              return <Movie key={movie.title} movie={movie} />
+            })}
+          </div>
+        } */}
+
+        <div className="searchMovies">
+          {searchMovie.slice(0, 6).map(movie => {
+            return <Movie key={movie.title} movie={movie} />
           })}
+        </div>
+
       </div>
+     
       <div>
         <Routes />
       </div>

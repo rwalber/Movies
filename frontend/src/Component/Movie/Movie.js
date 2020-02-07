@@ -11,8 +11,8 @@ export default function Movie({ movie }) {
             let genre = movie.genre_ids.slice(0, 2).map(genre_id => {
                 return genreList.genres.find(genre_name => {
                     return genre_name.id === genre_id
-                })
-            }
+                    })
+                }
             )
             setGenreMovie(genre)
         }
@@ -43,11 +43,11 @@ export default function Movie({ movie }) {
                             {movie.overview}
                         </p>
                         <div className="category">
-                            {genreMovie.map( genreName => 
+                            {genreMovie.map(genreName =>
                                 // Field key to avoid warning
-                                <label key={movie.title+genreName.name}>
+                                <label key={movie.title + genreName.name}>
                                     {genreName.name}
-                                </label> )}
+                                </label>)}
                         </div>
                     </div>
                 </div>
