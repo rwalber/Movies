@@ -1,15 +1,13 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import Movie from './Component/Movie/Movie';
-// import Home from './pages/Home/Home';
+import MovieDetail from './pages/MovieDetail/MovieDetail';
 
 export default function Routes(){
     return(
         <BrowserRouter>
             <Switch>
-                {/* <Route path="/home" component={Home}/> */}
-                <Route path="/movie" component={Movie}/>
+                <Route path="/movie" component={MovieDetail}/>
             </Switch>
         </BrowserRouter>
     )
