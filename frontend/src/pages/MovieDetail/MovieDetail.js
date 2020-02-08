@@ -1,10 +1,32 @@
-import React from 'react';
-import './MovieDetail.css';
+import React, { useEffect, useState } from 'react';
 import YouTube from 'react-youtube';
+import './MovieDetail.css';
 
-import poster_test from '../../assets/poster_avangers.jpg';
+import api from '../../services/api';
 
-export default function movieDetail() {
+export default function MovieDetail(props) {
+    
+    const movie_id = props.match.params.movie_id;
+    const [movie, setMovie] = useState([]);
+    const [movieVideo, setMovieVideo] = useState();
+    const [genre, setGenre] = useState([]);
+
+    useEffect(() => {
+        async function movieDetail(movie_id) {
+            const response = await api.get(`/movie/${movie_id}`, {});
+            setMovie(response.data);
+            setGenre(response.data.genres);
+        }
+        movieDetail(movie_id);
+    }, []);
+
+    useEffect(() => {
+        async function movieDetail(movie_id) {
+            const response = await api.get(`movie/${movie_id}/video`, {});
+            setMovieVideo(response.data);
+        }
+        movieDetail(movie_id);
+    }, []);
 
     const videoSettings = {
         height: '490',
@@ -19,9 +41,8 @@ export default function movieDetail() {
     }
 
     return (
-        // <>
+        <>
         <div className="content">
-
             <div className="header">
                 <div className="movie">
                     <p>Movies</p>
@@ -31,93 +52,65 @@ export default function movieDetail() {
             <div className="body">
 
                 <div className="title">
-
+                    {/* Use String(value) to resolve the NaN Warning */}
                     <div className="titleMovie">
-                        <p>Título do filme</p>
+                        <p>{String(movie.title)}</p>
                     </div>
 
                     <div className="date">
-                        <p>10/10/2020</p>
+                        <p>{String(movie.release_date)}</p>
                     </div>
 
                 </div>
 
                 <div className="overview">
                     <div className="overview_text">
-                        <h3>Sinopse</h3>
+                        <h3>Synopsis</h3>
                         <hr />
-                        <p>Sinopse é o resumo da obra que autores
-                            enviam a editoras para avaliação. Há um
-                            pouco de confusão a respeito porque a
-                            palavra tem o mesmo significado ..</p>
+                        <p>{String(movie.overview)}</p>
                         <div className="inf">
                             <div className="inf_header">
-                                <h3>Informações</h3>
+                                <h3>Information</h3>
                                 <hr />
                             </div>
                             <div className="inf_body">
                                 <div className="status">
-                                    <h4>
-                                        Situação
-                                </h4>
-                                    <h5>
-                                        Ativo
-                                </h5>
+                                    <h4>Status</h4>
+                                    <h5>{String(movie.status)}</h5>
                                 </div>
                                 <div className="language">
-                                    <h4>
-                                        Idioma
-                                </h4>
-                                    <h5>
-                                        Português
-                                </h5>
+                                    <h4>Language</h4>
+                                    <h5>{String(movie.original_language)}</h5>
                                 </div>
                                 <div className="duration">
-                                    <h4>
-                                        Duração
-                                </h4>
-                                    <h5>
-                                        1:30:00
-                                </h5>
+                                    <h4>Runtime</h4>
+                                    <h5>{String(movie.runtime)} min</h5>
                                 </div>
                                 <div className="budget">
-                                    <h4>
-                                        Orçamento
-                                </h4>
-                                    <h5>
-                                        50 mil
-                                </h5>
+                                    <h4>Budget</h4>
+                                    <h5>{String(movie.budget)}</h5>
                                 </div>
                                 <div className="revenue">
-                                    <h4>
-                                        Receita
-                                </h4>
-                                    <h5>
-                                        100 mil
-                                </h5>
+                                    <h4>Revenue</h4>
+                                    <h5>{String(movie.revenue)}</h5>
                                 </div>
                                 <div className="profit">
-                                    <h4>
-                                        Lucro
-                                </h4>
-                                    <h5>
-                                        50 mil
-                                </h5>
+                                    <h4>Profit</h4>
+                                    <h5>{String(movie.revenue - movie.budget)}</h5>
                                 </div>
                             </div>
                         </div>
-
-
+                        
                         <div className="genres">
-                            <label>Ação</label>
-                            <label>Ficção</label>
-                            <label>Aventura</label>
+                            {genre.map(g => {
+                                return <label key={String(g.name)}>{String(g.name)}</label>
+                            })}
                         </div>
 
                         <div className="rated">
                             <div className="rated_inner">
                                 <div className="rated_outer">
-                                    75%
+                                    {String(movie.vote_average * 10)}%
                                 </div>
                             </div>
                         </div>
@@ -125,19 +118,19 @@ export default function movieDetail() {
                     </div>
 
                     <div className="overview_poster">
-                        <img src={poster_test} alt="poster"/>
+                        <img src={`https://image.tmdb.org/t/p/original/${String(movie.poster_path)}`} alt="poster_path" />
                     </div>
                 </div>
 
                 <div className="trailer">
                     <YouTube
-                        videoId="g6ng8iy-l0U"
+                        videoId={String(movieVideo)}
                         opts={videoSettings}
                         onReady={onReady}
                     />
                 </div>
             </div>
         </div>
-        // </>
+        </>
     )
 }

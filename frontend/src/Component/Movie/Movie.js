@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../Movie/Movie.css';
 
 import genreList from '../../_constants/genreList';
 
 export default function Movie({ movie }) {
     const [genreMovie, setGenreMovie] = useState([]);
-
+    
     useEffect(() => {
         async function loadGenreMovies() {
             let genre = movie.genre_ids.slice(0, 2).map(genre_id => {
                 return genreList.genres.find(genre_name => {
                     return genre_name.id === genre_id
-                    })
-                }
+                })
+            }
             )
+            // console.log(movie)
             setGenreMovie(genre)
         }
         loadGenreMovies();
@@ -34,7 +36,9 @@ export default function Movie({ movie }) {
                     </div>
 
                     <div className="title">
-                        <p>{movie.title}</p>
+                        <Link to={`/detail/${movie.id}`}>
+                            <button>{movie.title}</button>
+                        </Link>
                     </div>
 
                     <div className="overview">

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import '../Home/Home.css';
 
-import Routes from '../../routes';
 import Movie from '../../Component/Movie/Movie';
 import api from '../../services/api';
 
 export default function Home() {
 
-    let search = false;
+    // let search = false;
     const [pMovies, setPMovies] = useState([]);
     const [searchMovie, setSearchMovie] = useState([]);
 
@@ -20,7 +19,7 @@ export default function Home() {
     }, []);
 
     async function searchMovies(event) {
-        search = true;
+        // search = true;
         const response = await api.get(`/search/${event}`, {});
         setSearchMovie(response.data);
     }
@@ -50,7 +49,7 @@ export default function Home() {
 
                 <div className="searchMovies">
                     {searchMovie.slice(0, 6).map(movie => {
-                        return <Movie key={movie.title} movie={movie} />
+                        return <Movie key={movie.title+movie.id} movie={movie} />
                     })}
                 </div>
 

@@ -24,14 +24,19 @@
     color: #00E1DF;
 }
 
-.content_movie .movie .title > p {
-    font-size: 30px;
-    padding: 20px 100px;
+.content_movie .movie .title button {
+    color: #00E1DF;
+    font-size: 25px;
+    margin-left: 20px;
+    margin-top: 25px;
+    border: 0;
+    cursor: pointer;
+    background-color: transparent;
 }
 
 .content_movie .movie .overview .moviePremiere{
     font-size: 18px;
-    padding-left: 100px;
+    padding-left: 110px;
     color: rgb(113, 158, 157);
 }
 
