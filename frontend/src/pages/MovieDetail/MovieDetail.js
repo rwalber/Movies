@@ -40,6 +40,12 @@ export default function MovieDetail(props) {
         event.target.pauseVideo();
     }
 
+    function reverse(date){
+        if(date){
+            return Array.from(date.split('-')).reverse().join('-');
+        }
+    }
+
     return (
         <>
         <div className="content">
@@ -58,7 +64,7 @@ export default function MovieDetail(props) {
                     </div>
 
                     <div className="date">
-                        <p>{String(movie.release_date)}</p>
+                        <p>{String(reverse(movie.release_date))}</p>
                     </div>
 
                 </div>
@@ -88,15 +94,15 @@ export default function MovieDetail(props) {
                                 </div>
                                 <div className="budget">
                                     <h4>Budget</h4>
-                                    <h5>{String(movie.budget)}</h5>
+                                    <h5>US$ {String(movie.budget)}</h5>
                                 </div>
                                 <div className="revenue">
                                     <h4>Revenue</h4>
-                                    <h5>{String(movie.revenue)}</h5>
+                                    <h5>US$ {String(movie.revenue)}</h5>
                                 </div>
                                 <div className="profit">
                                     <h4>Profit</h4>
-                                    <h5>{String(movie.revenue - movie.budget)}</h5>
+                                    <h5>US$ {String(movie.revenue - movie.budget)}</h5>
                                 </div>
                             </div>
                         </div>

@@ -105,7 +105,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 50px;
+  margin-right: 45px;
+  white-space: nowrap;
 }
 
 h4 {

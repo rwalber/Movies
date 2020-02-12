@@ -21,6 +21,12 @@ export default function Movie({ movie }) {
         loadGenreMovies();
     }, []);
 
+    function reverse(date){
+        if(date){
+            return Array.from(date.split('-')).reverse().join('-');
+        }
+    }
+
     return (
         <>
             <div className="content_movie">
@@ -42,7 +48,7 @@ export default function Movie({ movie }) {
                     </div>
 
                     <div className="overview">
-                        <p className="moviePremiere">{movie.release_date}</p>
+                        <p className="moviePremiere">{reverse(movie.release_date)}</p>
                         <p className="overview_text">
                             {movie.overview}
                         </p>

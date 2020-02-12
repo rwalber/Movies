@@ -22,6 +22,8 @@
     height: 60px;
     background-color: #116193;
     color: #00E1DF;
+    white-space: nowrap;
+    /* overflow: hidden; */
 }
 
 .content_movie .movie .title button {
