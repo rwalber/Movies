@@ -17,11 +17,13 @@
 ##### Run back-end
 ```
 backend/
+npm install
 yarn dev
 ```
 
 ##### Run front-end
 ```
 frontend/
+npm install
 yarn start
 ```
