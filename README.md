@@ -14,13 +14,13 @@
 
 ## Build project
 
-##### Run backend
+##### Run back-end
 ```
 backend/
 yarn dev
 ```
 
-##### Run frontend-web
+##### Run front-end
 ```
 frontend/
 yarn start
