@@ -79,7 +79,6 @@ export default function MovieDetail(props) {
                     <div className="date">
                         <p>{String(reverse(movie.release_date))}</p>
                     </div>
-
                 </div>
 
                 <div className="overview">
