@@ -46,6 +46,19 @@ export default function MovieDetail(props) {
         }
     }
 
+    //format number values
+    const budgetFormated = new Intl.NumberFormat('en-US', 
+        {style: 'currency', currency: 'USD'}
+    ).format(movie.budget)
+
+    const revenueFormated = new Intl.NumberFormat('en-US', 
+        {style: 'currency', currency: 'USD'}
+    ).format(movie.revenue)
+
+    const profitFormated = new Intl.NumberFormat('en-US', 
+        {style: 'currency', currency: 'USD'}
+    ).format((movie.revenue - movie.budget))
+
     return (
         <>
         <div className="content">
@@ -94,15 +107,15 @@ export default function MovieDetail(props) {
                                 </div>
                                 <div className="budget">
                                     <h4>Budget</h4>
-                                    <h5>US$ {String(movie.budget)}</h5>
+                                    <h5>{budgetFormated}</h5>
                                 </div>
                                 <div className="revenue">
                                     <h4>Revenue</h4>
-                                    <h5>US$ {String(movie.revenue)}</h5>
+                                    <h5>{revenueFormated}</h5>
                                 </div>
                                 <div className="profit">
                                     <h4>Profit</h4>
-                                    <h5>US$ {String(movie.revenue - movie.budget)}</h5>
+                                    <h5>{profitFormated}</h5>
                                 </div>
                             </div>
                         </div>
